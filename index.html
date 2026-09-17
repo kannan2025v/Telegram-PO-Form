@@ -55,15 +55,20 @@
         return;
       }
 
+      // Payload matching Option B Routing requirements in Activepieces
       const payload = {
+        form_type: "PO_ENTRY", // Required for Option B Router
         po_number: poNumber,
         supplier: supplier,
         item: item,
         quantity: Number(quantity)
       };
 
-      // Send JSON string back to Telegram trigger node in n8n
+      // 1. Send JSON string back to Telegram trigger
       tg.sendData(JSON.stringify(payload));
+
+      // 2. Close Web App window automatically
+      tg.close();
     });
   </script>
 </body>
